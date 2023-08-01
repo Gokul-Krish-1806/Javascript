@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <style>
+    .one{
+        text-align: center;
+        background-color: rgb(136, 246, 246);
+    
+    }
+    .two{
+        border-radius: 10px;
+    }
+    ul {
+        
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    button {
+      margin-left: 50px;
+    }
+  </style>
+</head>
+<body>
+    <div class="one">
+  <h1>Add ** REMOVE</h1>
+   <input type="" id="taskInput" class="two" placeholder="Enter task">
+  <button class="two" onclick="addTask()">Add Task</button>
+  <ul id="taskList">
+  </ul>
+</div>
+  <script>
+    function addTask() {
+      const inputElement = document.getElementById('taskInput');
+      const task = inputElement.value.trim();
+      
+      if (task === '') {
+        return;
+      }
+
+      const taskListElement = document.getElementById('taskList');
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${task}</span>
+        <button onclick="markDone(this)">Done</button>
+        <button onclick="removeTask(this)">Remove</button>
+      `;
+      taskListElement.appendChild(li);
+      inputElement.value = '';
+    }
+
+    function markDone(button) {
+      const li = button.parentElement;
+      li.style.textDecoration = 'line-through';
+      button.disabled = true;
+    }
+
+    function removeTask(button) {
+      const li = button.parentElement;
+      li.remove();
+    }
+  </script>
+</body>
+</html>
